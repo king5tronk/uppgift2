@@ -1,9 +1,10 @@
+package Program;
+
+import ReaderOfFile.ReaderOfFile;
+
 import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class HeadProgram {
 
@@ -13,11 +14,15 @@ public class HeadProgram {
 
     }
 
-    public String userInput() throws FileNotFoundException {
-       String s = JOptionPane.showInputDialog("Skriv in namnet på en medlem");
-        ReaderOfFile e = new ReaderOfFile();
-        e.searchMember(s);
-        return s;
+    public void userInput() throws FileNotFoundException {
+        boolean repeat = true;
+        do {
+            String s = JOptionPane.showInputDialog("Skriv in för och efternamn på medlem eller personnummer!");
+            s = s.replaceAll("\\s", "");
+            ReaderOfFile e = new ReaderOfFile();
+            e.searchMember(s);
+        } while(repeat);
+
     }
     /*public List<String> customerSearch (List<String> e){
         String s = JOptionPane.showInputDialog("Skriv in namnet på en medlem");

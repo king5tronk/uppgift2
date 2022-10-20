@@ -1,10 +1,12 @@
+package Customer;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Customer {
     public Customer(){
-        checkIfActiveMember();
+       // checkIfActiveMember(date);
     }
     private String name;
     private String secNumber;
@@ -21,9 +23,18 @@ public class Customer {
         this.name = name;
         this.date = date;
 
+        if (LocalDate.parse(date).isBefore(LocalDate.now().minusYears(1))){
+            activeMember = false;
+        }
+
+    }
+
+    public boolean isActiveMember() {
+        return activeMember;
     }
 
     public String getDate() {
+
         return date;
     }
 
@@ -31,18 +42,27 @@ public class Customer {
         return secNumber;
     }
 
-    /*public LocalDate getDate() {
-        return date;
-    }*/
 
     public String getName() {
         return name;
     }
+    public String getActiveMemberShip(){
+        if (activeMember){
+            return "ja";
+        } else{
+            return "nej";
+        }
+    }
 
-    public void checkIfActiveMember() {
+    /*public boolean checkIfActiveMember(String date) {
           LocalDate dateFromString = LocalDate.parse(date, formatter);
         if (dateFromString.isBefore(LocalDate.now().minusYears(1))) {
             activeMember = false;
         }
+        return false;
+    }*/
+    @Override
+    public String toString(){
+        return name + "\nPersonnummer " + secNumber + "\nÅrsavgift betalades " + date;
     }
 }
